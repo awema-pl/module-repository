@@ -109,7 +109,7 @@ abstract class BaseRepository extends RepositoryAbstract implements RepositoryIn
      * @param   $userId
      * @return \Illuminate\Contracts\Pagination\Paginator
      */
-    public function userOwner($userIdColumn = 'user_id', $userId = null)
+    public function isOwner($userIdColumn = 'user_id', $userId = null)
     {
         $this->where($userIdColumn, $userId?? Auth::id());
 
