@@ -38,6 +38,17 @@ interface RepositoryInterface
      */
     public function findWhere(array $conditions, array $columns = ['*']);
 
+
+    /**
+     * Add basic where clauses and execute single the query.
+     *
+     * @param array $conditions
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function firstWhere(array $conditions, array $columns = ['*']);
+
     /**
      * Paginate the given query.
      *
@@ -137,6 +148,25 @@ interface RepositoryInterface
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function firstOrFail($columns = ['*']);
+
+
+    /**
+     * Create or update a record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function updateOrCreate(array $attributes, array $values);
+
+    /**
+     * First or update a record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function firstOrCreate(array $attributes, array $values);
 
     /**
      * Paginate the given query by 'limit' request parameter

@@ -5,6 +5,8 @@ namespace AwemaPL\Repository\Eloquent;
 use AwemaPL\Repository\Contracts\RepositoryInterface;
 use AwemaPL\Repository\Criteria\With;
 use AwemaPL\Repository\Criteria\FindWhere;
+use AwemaPL\Storage\User\Sections\Manufacturers\Models\Manufacturer;
+use AwemaPL\Storage\User\Sections\Manufacturers\Repositories\EloquentManufacturerRepository;
 use Illuminate\Support\Facades\Auth;
 
 abstract class BaseRepository extends RepositoryAbstract implements RepositoryInterface
@@ -67,6 +69,21 @@ abstract class BaseRepository extends RepositoryAbstract implements RepositoryIn
         return $this->withCriteria([
             new FindWhere($conditions)
         ])->get($columns);
+    }
+
+    /**
+     * Add basic where clauses and execute single the query.
+     *
+     * @param array $conditions
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function firstWhere(array $conditions, array $columns = ['*'])
+    {
+        return $this->withCriteria([
+            new FindWhere($conditions)
+        ])->first($columns);
     }
 
     /**
@@ -241,6 +258,32 @@ abstract class BaseRepository extends RepositoryAbstract implements RepositoryIn
 
         $this->reset();
 
+        return $results;
+    }
+
+    /**
+     * Create or update a record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function updateOrCreate(array $attributes, array $values){
+        $results = $this->entity->updateOrCreate($attributes, $values);
+        $this->reset();
+        return $results;
+    }
+
+    /**
+     * First or update a record matching the attributes, and fill it with values.
+     *
+     * @param  array  $attributes
+     * @param  array  $values
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function firstOrCreate(array $attributes, array $values){
+        $results = $this->entity->firstOrCreate($attributes, $values);
+        $this->reset();
         return $results;
     }
 
