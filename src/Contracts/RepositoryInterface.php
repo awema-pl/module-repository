@@ -38,7 +38,6 @@ interface RepositoryInterface
      */
     public function findWhere(array $conditions, array $columns = ['*']);
 
-
     /**
      * Add basic where clauses and execute single the query.
      *
