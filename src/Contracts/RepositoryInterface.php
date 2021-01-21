@@ -44,7 +44,7 @@ interface RepositoryInterface
      * @param array $conditions
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Model|object|static|null
      */
     public function firstWhere(array $conditions, array $columns = ['*']);
 
